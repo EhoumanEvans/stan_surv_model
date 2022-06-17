@@ -1,3 +1,4 @@
+rm(list=ls())
 options(timeout=1000)
 # library
 library(rstan)
@@ -14,6 +15,7 @@ options(mc.cores = parallel::detectCores())
 # generate data
 n_obs <-c(1:150)
 species<-sample(c('anon_murica', 'antia_toxi', 'termi_ivori', 'bafia_niti', 'ricino_heudelo', 'bombax_puero'), 150, replace=TRUE)
+numb_ind <-sample(1: 25 , size = 150, replace = T)
 plot <- sample(c('88-2', '88-3', '88-4', '88-9', '90-1', '90-8', '91-12', '92-1', '92-1', '95-3'), 150, replace=TRUE)
 area_plat <- sample(c('1155', '6000', '1040', '1837', '22008', '1568', '6552', '4312', '1456'), 150, replace=TRUE)
 survival<-sample(c('1', '0'), 150, replace=TRUE)
@@ -21,8 +23,9 @@ spacing_s<-sample(c('3x3.5', '5x5', '3x5', '2x3.5'), 150, replace=TRUE)
 type_plant<-sample(c('pure', 'mixture'), 150, replace=TRUE)
 year_plant<-sample(c(1988, 1990, 1991, 1992, 1995), 150, replace=TRUE)
 
-df <- data.frame(n_obs, plot, area_plat, year_plant, species, survival, spacing_s, type_plant)
+df <- data.frame(n_obs, plot, area_plat, year_plant, species, survival, spacing_s, type_plant, numb_ind)
 
+table(df$plot)
 
 # write.csv(df, "df.csv", row.names=FALSE)
 # data <- read.csv("df.csv")
